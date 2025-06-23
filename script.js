@@ -7,6 +7,12 @@ document.addEventListener('DOMContentLoaded', function() {
   const intervalSelect = document.getElementById('intervalSelect');
   const applyIntervalBtn = document.getElementById('applyIntervalBtn');
 
+  // Check if all required elements exist
+  if (!timerDisplay || !startPauseBtn || !stopBtn || !intervalSelect || !applyIntervalBtn) {
+    console.error('One or more required elements not found');
+    return;
+  }
+
   let timer;
   let timeLeft = 25 * 60; // 25 minutes in seconds
   let running = false;
