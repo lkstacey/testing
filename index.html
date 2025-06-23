@@ -7,16 +7,39 @@
 </head>
 <body>
   <div class="timer-container">
-    <div class="timer-row">
-      <button id="add5Btn" title="Add 5 minutes">+5</button>
-      <h1 id="timer">25:00</h1>
-      <button id="sub5Btn" title="Subtract 5 minutes">-5</button>
-    </div>
-    <div class="buttons">
-      <button id="startPauseBtn" title="Start">&#9654;</button>
-      <button id="stopBtn" title="Stop">&#9632;</button>
+    <div class="cupcake-cherry"></div>
+    <div class="cupcake-frosting"></div>
+    <div class="cupcake-base">
+      <div class="timer-row">
+        <h1 id="timer">25:00</h1>
+      </div>
+      <div class="menu-group">
+        <select id="intervalSelect" title="Choose timer duration">
+          <option value="1">1 min</option>
+          <option value="5">5 min</option>
+          <option value="10">10 min</option>
+          <option value="15">15 min</option>
+          <option value="20">20 min</option>
+          <option value="25">25 min</option>
+          <option value="30">30 min</option>
+          <option value="35">35 min</option>
+          <option value="40">40 min</option>
+          <option value="45">45 min</option>
+          <option value="50">50 min</option>
+          <option value="55">55 min</option>
+          <option value="60">60 min</option>
+        </select>
+        <button id="applyIntervalBtn" title="Set timer duration">Apply</button>
+      </div>
+      <div class="buttons">
+        <button id="startPauseBtn" title="Start">&#9654;</button>
+        <button id="stopBtn" title="Stop">&#9632;</button>
+      </div>
     </div>
   </div>
+  <audio id="alarmAudio" preload="auto">
+    <source src="https://actions.google.com/sounds/v1/alarms/digital_watch_alarm_long.ogg" type="audio/ogg">
+  </audio>
   <script src="script.js"></script>
 </body>
 </html> 
