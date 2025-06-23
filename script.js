@@ -1,8 +1,8 @@
 const timerDisplay = document.getElementById('timer');
-const startBtn = document.getElementById('startBtn');
+const startPauseBtn = document.getElementById('startPauseBtn');
 const stopBtn = document.getElementById('stopBtn');
-const pauseBtn = document.getElementById('pauseBtn');
-const intervalSelect = document.getElementById('intervalSelect');
+const add5Btn = document.getElementById('add5Btn');
+const sub5Btn = document.getElementById('sub5Btn');
 
 let timer;
 let timeLeft = 25 * 60; // 25 minutes in seconds
@@ -18,6 +18,8 @@ function updateDisplay() {
 function startTimer() {
   if (running) return;
   running = true;
+  startPauseBtn.innerHTML = '&#10073;&#10073;'; // Pause icon
+  startPauseBtn.title = 'Pause';
   timer = setInterval(() => {
     if (timeLeft > 0) {
       timeLeft--;
@@ -25,8 +27,17 @@ function startTimer() {
     } else {
       clearInterval(timer);
       running = false;
+      startPauseBtn.innerHTML = '&#9654;'; // Start icon
+      startPauseBtn.title = 'Start';
     }
   }, 1000);
+}
+
+function pauseTimer() {
+  clearInterval(timer);
+  running = false;
+  startPauseBtn.innerHTML = '&#9654;'; // Start icon
+  startPauseBtn.title = 'Start';
 }
 
 function stopTimer() {
@@ -34,23 +45,25 @@ function stopTimer() {
   running = false;
   timeLeft = 25 * 60;
   updateDisplay();
+  startPauseBtn.innerHTML = '&#9654;'; // Start icon
+  startPauseBtn.title = 'Start';
 }
 
-function pauseTimer() {
-  clearInterval(timer);
-  running = false;
-}
-
-intervalSelect.addEventListener('change', function() {
-  const value = parseInt(intervalSelect.value, 10);
-  timeLeft = Math.max(0, timeLeft + value * 60);
+function addMinutes(mins) {
+  timeLeft = Math.max(0, timeLeft + mins * 60);
   updateDisplay();
-  // Reset dropdown to default after applying
-  intervalSelect.selectedIndex = 0;
+}
+
+startPauseBtn.addEventListener('click', function() {
+  if (running) {
+    pauseTimer();
+  } else {
+    startTimer();
+  }
 });
 
-startBtn.addEventListener('click', startTimer);
 stopBtn.addEventListener('click', stopTimer);
-pauseBtn.addEventListener('click', pauseTimer);
+add5Btn.addEventListener('click', function() { addMinutes(5); });
+sub5Btn.addEventListener('click', function() { addMinutes(-5); });
 
 updateDisplay(); 

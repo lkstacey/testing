@@ -9,66 +9,89 @@ body {
 }
 
 .timer-container {
-  background: #fff;
+  background: #b3e5fc;
   padding: 2rem 3rem;
   border-radius: 12px;
-  box-shadow: 0 2px 16px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 16px rgba(0,0,0,0.08);
   text-align: center;
+}
+
+.timer-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 2rem;
 }
 
 #timer {
   font-size: 5.2rem;
-  margin-bottom: 1.5rem;
+  margin: 0 2rem;
   letter-spacing: 2px;
+  min-width: 8ch;
+}
+
+#add5Btn {
+  font-size: 2rem;
+  padding: 0.5rem 1.2rem;
+  background: #f8bbd0;
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  margin: 0 0.5rem;
+  transition: background 0.2s;
+}
+
+#add5Btn:hover {
+  background: #f48fb1;
+}
+
+#sub5Btn {
+  font-size: 2rem;
+  padding: 0.5rem 1.2rem;
+  background: #b3e5fc;
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  margin: 0 0.5rem;
+  transition: background 0.2s;
+}
+
+#sub5Btn:hover {
+  background: #81d4fa;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
 }
 
 .buttons button {
   font-size: 1.56rem;
-  padding: 0.5rem 1.5rem;
-  margin: 0 0.5rem;
+  padding: 0.5rem 2.2rem;
   border: none;
   border-radius: 6px;
   cursor: pointer;
+  color: #fff;
   transition: background 0.2s;
 }
 
-.buttons button#startBtn {
-  background: #f8bbd0; /* pastel pink */
-  color: #fff;
+#startPauseBtn {
+  background: #f8bbd0;
 }
 
-.buttons button#add5Btn {
-  background: #f8bbd0; /* pastel pink */
-  color: #fff;
-}
-
-.buttons button#pauseBtn {
-  background: #b3e5fc; /* pastel blue */
-  color: #fff;
-}
-
-.buttons button#sub5Btn {
-  background: #b3e5fc; /* pastel blue */
-  color: #fff;
-}
-
-.buttons button#stopBtn {
-  background: #ffcdd2; /* lighter pastel red */
-  color: #fff;
-}
-
-.buttons button#startBtn:hover,
-.buttons button#add5Btn:hover {
+#startPauseBtn:hover {
   background: #f48fb1;
 }
 
-.buttons button#pauseBtn:hover,
-.buttons button#sub5Btn:hover {
-  background: #81d4fa;
+#stopBtn {
+  background: #b3e5fc;
 }
 
-.buttons button#stopBtn:hover {
-  background: #e57373;
+#stopBtn:hover {
+  background: #81d4fa;
 }
 
 .buttons select#intervalSelect {
@@ -94,13 +117,9 @@ body {
   transition: background 0.2s;
 }
 
-.buttons button#startBtn:hover,
+.buttons button#startPauseBtn:hover,
 .buttons button#applyIntervalBtn:hover {
   background: #f48fb1;
-}
-
-.buttons button#pauseBtn:hover {
-  background: #81d4fa;
 }
 
 .buttons button#stopBtn:hover {
