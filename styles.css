@@ -1,5 +1,6 @@
 body {
-  background: #fff;
+  background: url('data:image/svg+xml;utf8,<svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg"><g><ellipse cx="30" cy="45" rx="15" ry="8" fill="%23f8bbd0"/><ellipse cx="30" cy="35" rx="13" ry="10" fill="%23fff"/><rect x="17" y="45" width="26" height="10" rx="5" fill="%23b3e5fc"/><ellipse cx="30" cy="32" rx="3" ry="2" fill="%23f48fb1"/></g></svg>');
+  background-size: 160px 160px;
   display: flex;
   height: 100vh;
   align-items: center;
@@ -9,47 +10,152 @@ body {
 }
 
 .timer-container {
+  position: relative;
+  background: none;
+  padding: 0;
+  width: 420px;
+  height: 600px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  z-index: 1;
+}
+
+.timer-container::before {
+  display: none !important;
+}
+
+.timer-container::after {
+  /* Wrapper (base) */
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 320px;
+  height: 240px;
   background: #b3e5fc;
-  padding: 2rem 3rem;
-  border-radius: 12px;
-  box-shadow: 0 2px 16px rgba(0,0,0,0.08);
-  text-align: center;
+  clip-path: polygon(18% 0, 82% 0, 100% 100%, 0% 100%);
+  z-index: 1;
+  box-shadow: 0 12px 36px rgba(0,0,0,0.12);
+}
+
+.cupcake-frosting {
+  display: none;
+}
+
+.cupcake-cherry {
+  display: none;
+}
+
+.cupcake-base {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 420px;
+  height: 260px;
+  background: #b3e5fc;
+  border-radius: 60px 60px 80px 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  box-shadow: 0 12px 36px rgba(0,0,0,0.12);
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+.timer-row, .menu-group, .buttons {
+  position: relative;
+  z-index: 5;
 }
 
 .timer-row {
+  margin-bottom: 1.2rem;
+  margin-top: 0.5rem;
+  width: 100%;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-bottom: 2rem;
+}
+
+.menu-group {
+  margin-bottom: 2.5rem;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
 }
 
 #timer {
   font-size: 5.2rem;
-  margin: 0 2rem;
+  margin: 0;
   letter-spacing: 2px;
-  min-width: 8ch;
 }
 
-#add5Btn, #sub5Btn {
-  font-size: 2rem;
+#plusMinusBtn {
+  font-size: 1.3rem;
   padding: 0.5rem 1.2rem;
-  background: #f8bbd0;
-  color: #fff;
-  border: none;
-  border-radius: 50%;
+  background: #b3e5fc;
+  color: #333;
+  border: 1px solid #81d4fa;
+  border-radius: 6px;
   cursor: pointer;
-  margin: 0 0.5rem;
+  margin-bottom: 0.3rem;
+  transition: background 0.2s, color 0.2s;
+  box-shadow: none;
+}
+
+#plusMinusBtn:hover {
+  background: #81d4fa;
+  color: #222;
+}
+
+#plusMinusMenu {
+  position: absolute;
+  top: 50%;
+  left: 110%;
+  transform: translateY(-50%);
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  display: flex;
+  flex-direction: column;
+  min-width: 100px;
+  z-index: 10;
+}
+
+#plusMinusMenu.hidden {
+  display: none;
+}
+
+.menu-item {
+  background: none;
+  border: none;
+  color: #333;
+  font-size: 1.2rem;
+  padding: 0.7rem 1.2rem;
+  text-align: left;
+  cursor: pointer;
   transition: background 0.2s;
 }
 
-#add5Btn:hover, #sub5Btn:hover {
-  background: #f48fb1;
+.menu-item:hover {
+  background: #f8bbd0;
+  color: #fff;
 }
+
+#add5Btn, #sub5Btn { display: none; }
 
 .buttons {
   display: flex;
   justify-content: center;
   gap: 1.5rem;
+  margin-bottom: 0.5rem;
 }
 
 .buttons button {
@@ -71,25 +177,14 @@ body {
 }
 
 #stopBtn {
-  background: #b3e5fc;
+  background: #f8bbd0;
 }
 
 #stopBtn:hover {
-  background: #81d4fa;
+  background: #f48fb1;
 }
 
-.buttons select#intervalSelect {
-  font-size: 1.43rem;
-  padding: 0.5rem 1rem;
-  margin: 0 0.5rem;
-  border: 1px solid #e0e0e0;
-  border-radius: 6px;
-  background: #f3e5f5;
-  color: #333;
-  outline: none;
-}
-
-.buttons button#applyIntervalBtn {
+#applyIntervalBtn {
   background: #f8bbd0;
   color: #fff;
   font-size: 1.43rem;
@@ -101,11 +196,17 @@ body {
   transition: background 0.2s;
 }
 
-.buttons button#startPauseBtn:hover,
-.buttons button#applyIntervalBtn:hover {
+#applyIntervalBtn:hover {
   background: #f48fb1;
 }
 
-.buttons button#stopBtn:hover {
-  background: #e57373;
+#intervalSelect {
+  font-size: 1.43rem;
+  padding: 0.5rem 1rem;
+  margin: 0 0.5rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  background: #f3e5f5;
+  color: #333;
+  outline: none;
 } 
